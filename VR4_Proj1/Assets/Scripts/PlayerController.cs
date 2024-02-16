@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1 + .1f, groundedMask))
         {
-            Debug.Log("Ground Checked!");
             grounded = true;
         }
         else
