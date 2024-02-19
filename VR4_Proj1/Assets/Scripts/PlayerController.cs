@@ -21,6 +21,9 @@ public class PlayerController : MonoBehaviour
     Transform cameraTransform;
     Rigidbody rigidbody;
 
+    // gravity stuff
+    public Quaternion currentRotation;
+    public Vector3 currentFallDirection;
 
     void Awake()
     {
@@ -68,7 +71,6 @@ public class PlayerController : MonoBehaviour
         {
             grounded = false;
         }
-
     }
 
     void FixedUpdate()
