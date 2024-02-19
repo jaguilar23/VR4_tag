@@ -15,7 +15,7 @@ public class ParallelGravityAttractor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Is that freezia");
+        //Debug.Log("Is that freezia");
         if (other.gameObject.tag == "Player")
         {
             Vector3 direction = -transform.up;
