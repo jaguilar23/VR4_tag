@@ -19,14 +19,11 @@ public class ParallelGravityAttractor : MonoBehaviour
         {
             pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         } catch
-        {
-            Debug.Log("Finding player...");
-        }
+        {}
     }
 
     private void OnTriggerStay(Collider other)
     {
-        //Debug.Log("Is that freezia");
         if (other.gameObject.tag == "Player")
         {
             Vector3 direction = -transform.up;

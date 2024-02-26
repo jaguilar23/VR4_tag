@@ -1,34 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 using Photon.Pun;
-
 public class MultiplayerMovement : MonoBehaviour
 {
+    private PhotonView myView;
+    private GameObject myChild;
 
-    public PhotonView myView;
-
-    //Movement
-    private GameObject myBody;
-    private Rigidbody myRB;
     private float xInput;
-    private float zInput;
+    private float yInput;
     private float movementSpeed = 10.0f;
 
-    //Material
-    private MeshRenderer myMesh;
-    private int index = 0;
-    [SerializeField] List<Material> myMaterials;
+    private InputData inputData;
+    //[SerializeField] private GameObject myObjectToMove;
+    private Rigidbody myRB;
+    private Transform myXRRig;
+
+    // System vars
+    bool grounded;
+    public LayerMask groundedMask;
+    Vector3 moveAmount;
+    Vector3 smoothMoveVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        myView = GetComponentInParent<PhotonView>();
+        myView = GetComponent<PhotonView>();
 
-        myBody = transform.GetChild(0).gameObject;
-        myRB = myBody.GetComponent<Rigidbody>();
+        myChild = transform.GetChild(0).gameObject;
+        myRB = myChild.GetComponent<Rigidbody>();
 
-        myMesh = myBody.GetComponent<MeshRenderer>();
+        GameObject myXrOrigin = GameObject.Find("XR Origin (XR Rig)");
+        myXRRig = myXrOrigin.transform;
+        inputData = myXrOrigin.GetComponent<InputData>();
     }
 
     // Update is called once per frame
@@ -36,34 +41,43 @@ public class MultiplayerMovement : MonoBehaviour
     {
         if (myView.IsMine)
         {
-            xInput = Input.GetAxis("Horizontal");
-            zInput = Input.GetAxis("Vertical");
+            myXRRig.position = myChild.transform.position;
+
+            // TryGetFeatureValue is VERY useful for future development
+            if (inputData.rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 movement))
+            {
+                xInput = movement.x;
+                yInput = movement.y;
+            }
+            else
+            {
+                xInput = Input.GetAxis("Horizontal");
+                yInput = Input.GetAxis("Vertical");
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        Vector3 moveDir = new Vector3(xInput, 0, yInput).normalized;
+        Vector3 targetMoveAmount = moveDir * movementSpeed;
+        moveAmount = Vector3.SmoothDamp(moveAmount, targetMoveAmount, ref smoothMoveVelocity, .15f);
+
+        // Grounded check
+        Ray ray = new Ray(transform.position, -transform.up);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 1 + .1f, groundedMask))
         {
-            myView.RPC("changeMaterial", RpcTarget.Others);
+            grounded = true;
+        }
+        else
+        {
+            grounded = false;
         }
     }
-
 
     private void FixedUpdate()
     {
-        myRB.AddForce(xInput * movementSpeed, 0, zInput * movementSpeed);
-    }
-
-    [PunRPC]
-    void changeMaterial()
-    {
-        if (myView.IsMine)
-        {
-            if (index == myMaterials.Count)
-            {
-                index = 0;
-            }
-
-            myMesh.material = myMaterials[index];
-            index++;
-        }
+        Vector3 localMove = transform.TransformDirection(moveAmount) * Time.fixedDeltaTime;
+        //myRB.AddForce(xInput * movementSpeed, 0, yInput * movementSpeed);
+        myRB.MovePosition(myRB.position + localMove);
     }
 }
