@@ -22,7 +22,7 @@ public class MovementManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myView = GetComponent<PhotonView>();
+        myView = GetComponentInParent<PhotonView>();
 
         myChild = transform.GetChild(0).gameObject;
 

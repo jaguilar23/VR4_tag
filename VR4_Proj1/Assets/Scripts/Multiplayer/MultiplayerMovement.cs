@@ -23,7 +23,7 @@ public class MultiplayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myView = GetComponent<PhotonView>();
+        myView = GetComponentInParent<PhotonView>();
 
         myBody = transform.GetChild(0).gameObject;
         myRB = myBody.GetComponent<Rigidbody>();

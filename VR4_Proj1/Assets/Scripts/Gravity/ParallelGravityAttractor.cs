@@ -10,7 +10,18 @@ public class ParallelGravityAttractor : MonoBehaviour
     private void Start()
     {
         gravity = 10f;
-        pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        // find player object once they're on the server
+        try
+        {
+            pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        } catch
+        {
+            Debug.Log("Finding player...");
+        }
     }
 
     private void OnTriggerStay(Collider other)
