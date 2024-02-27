@@ -27,7 +27,7 @@ public class LifeCounter : MonoBehaviour
     public void TakeDamage(int d)
     {
         life -= d;
-        Destroy(hearts[life].gameObject);
+        hearts[life].gameObject.SetActive(false);
         if (life < 1)
         {
             dead = true;

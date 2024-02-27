@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 4650292448510473715}
   m_Layer: 0
   m_Name: NetworkPlayer
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &-8702954084970856985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 6085097298291775957}
   - component: {fileID: 8027710318279534932}
   - component: {fileID: 5402413396198263198}
-  - component: {fileID: 6666237432298870197}
+  - component: {fileID: 7289908068750788943}
   - component: {fileID: 8770500648146533579}
   m_Layer: 0
   m_Name: lego_w_rig
@@ -538,27 +538,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.14, y: 0.25, z: 0.07}
   m_Center: {x: 0, y: 0.123, z: 0}
---- !u!114 &6666237432298870197
+--- !u!114 &7289908068750788943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521897457245523533}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17ce2fbe09e8eff4d951a44dcbfd466b, type: 3}
+  m_Script: {fileID: 11500000, guid: 476d3cb5eb217504a9022cc1180a16bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivityX: 5
-  mouseSensitivityY: 5
-  walkSpeed: 14
-  jumpForce: 240
-  groundedMask:
-    serializedVersion: 2
-    m_Bits: 8
-  currentRotation: {x: 0, y: 0, z: 0, w: 0}
-  currentFallDirection: {x: 0, y: 0, z: 0}
+  isSeeker: 0
+  currentSeekerTimer: 0
 --- !u!114 &8770500648146533579
 MonoBehaviour:
   m_ObjectHideFlags: 0
