@@ -4,19 +4,30 @@ using UnityEngine;
 
 public class GravityBody : MonoBehaviour
 {
-    private Rigidbody rb;
-    public Quaternion currentRotation;
-    public Vector3 currentFallDirection;
+    GravityAttractor planet;
+    Rigidbody rigidbody;
 
-    // Start is called before the first frame update
-    void Start()
+    public float timer = 1.0f;
+
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        planet = GameObject.FindGameObjectWithTag("Planet").GetComponent<GravityAttractor>();
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.useGravity = false;
+        rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     private void FixedUpdate()
     {
-        transform.rotation = currentRotation;
-        rb.AddForce(currentFallDirection);
+        planet.Attract(transform);
+
+        timer -= Time.deltaTime;
+
+        if (timer <= 0.0f)
+        {
+            //Debug.Log(transform.rotation.x + ", " + transform.rotation.y + ", " + transform.rotation.z + ", " + transform.rotation.w);
+            timer = 1.0f;
+        }
+
     }
 }

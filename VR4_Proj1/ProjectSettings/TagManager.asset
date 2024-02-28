@@ -6,6 +6,8 @@ TagManager:
   tags:
   - RoomLight
   - SamplesInfoPanel
+  - Bullet
+  - Planet
   layers:
   - Default
   - TransparentFX
