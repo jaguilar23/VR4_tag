@@ -12,6 +12,14 @@ public class TurboSpeed : MonoBehaviour
     [SerializeField]
     private GameObject disableBoost = null;
 
+    private MeshRenderer myRenderer;
+    private BoxCollider myCollider;
+
+    private void Start()
+    {
+        myRenderer = GetComponent<MeshRenderer>();
+        myCollider = GetComponent<BoxCollider>();
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -25,6 +33,10 @@ public class TurboSpeed : MonoBehaviour
                 Debug.Log("Speed");
             }
         }
+
+        // "Delete" powerup
+        myRenderer.enabled = false;
+        myCollider.enabled = false;
     }
 
     IEnumerator BoostSpeed(PlayerController playerController)

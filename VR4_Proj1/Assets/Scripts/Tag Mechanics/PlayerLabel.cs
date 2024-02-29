@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLabel : MonoBehaviour
 {
     public bool isSeeker;
     float seekerStartTime = 10.0f;
     public float currentSeekerTimer;
+
+    public int numTeleports = 0;
+    float teleportDistance = 15.0f;
+
+    [SerializeField] TextMeshProUGUI teleportCountDisplay;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +35,30 @@ public class PlayerLabel : MonoBehaviour
             } else
             {
                 currentSeekerTimer -= Time.deltaTime;
+            }
+        }
+
+        // Displays teleport use count in UI
+        teleportCountDisplay.text = "Teleports: " + numTeleports.ToString();
+
+        if (Input.GetKeyDown(KeyCode.U) && numTeleports > 0)
+        {
+            Vector3 teleportPosition = transform.position + transform.forward * teleportDistance;
+            transform.position = teleportPosition; // move the player
+
+            numTeleports--;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            // display UI to user
+            if (isSeeker)
+            {
+                Debug.Log("You are the SEEKER");
+            }
+            else
+            {
+                Debug.Log("You are a HIDER");
             }
         }
     }

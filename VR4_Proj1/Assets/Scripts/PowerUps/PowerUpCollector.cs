@@ -21,6 +21,7 @@ public class PowerUpCollector : MonoBehaviour
         scoreText.text = "Score: " + score;
         */
         instance = this;
+
     }
 
     void Start()

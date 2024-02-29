@@ -25,9 +25,6 @@ public class TagManager : MonoBehaviour
         {
             designateSeeker();
         }
-        
-
-
     }
 
     public void designateSeeker()
@@ -40,15 +37,5 @@ public class TagManager : MonoBehaviour
 
         // selecting random player as seeker
         playerList[Random.Range(0, playerList.Length)].GetComponent<PlayerLabel>().isSeeker = true;
-       // Debug.Log("You are the SEEKER");
-
-        // display UI to user
-        if (gameObject.tag == "Player" && script.isSeeker == true) 
-        {
-            Debug.Log("You are the SEEKER");
-        } else
-        {
-            Debug.Log("You are a HIDER");
-        }
     }
 }

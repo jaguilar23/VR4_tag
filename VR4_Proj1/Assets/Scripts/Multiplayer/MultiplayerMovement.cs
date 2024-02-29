@@ -26,10 +26,10 @@ public class MultiplayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myView = GetComponent<PhotonView>();
+        myView = GetComponentInParent<PhotonView>();
 
-        myChild = transform.GetChild(0).gameObject;
-        myRB = myChild.GetComponent<Rigidbody>();
+        //myChild = transform.GetChild(0).gameObject;
+        myRB = GetComponent<Rigidbody>();
 
         GameObject myXrOrigin = GameObject.Find("XR Origin (XR Rig)");
         myXRRig = myXrOrigin.transform;
@@ -41,7 +41,7 @@ public class MultiplayerMovement : MonoBehaviour
     {
         if (myView.IsMine)
         {
-            myXRRig.position = myChild.transform.position;
+            myXRRig.position = transform.position;
 
             // TryGetFeatureValue is VERY useful for future development
             if (inputData.rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 movement))

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeCounter : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class LifeCounter : MonoBehaviour
         if (dead == true)
         {
             Debug.Log("You died!");
-        }
+        } 
     }
 
     public void TakeDamage(int d)
@@ -31,6 +32,7 @@ public class LifeCounter : MonoBehaviour
         if (life < 1)
         {
             dead = true;
+            Application.Quit();
         }
     }
 }

@@ -9,38 +9,30 @@ public class Teleport : MonoBehaviour
 {
     public Vector3 teleportPosition;
     public float teleportDistance = 3.0f; // Distance to teleport
-    private Transform playerTransform;
-    public int powerUpCredits = 0;
+    private MeshRenderer myRenderer;
+    private BoxCollider myCollider;
 
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform; // Assuming player has a "Player" tag
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.U) && powerUpCredits > 0)
-        {
-            // move the player
-           /*
-            Vector3 teleportPosition = playerTransform.position + playerTransform.forward * teleportDistance;
-            playerTransform.position = teleportPosition;
-           */
-            powerUpCredits--;
-        }
+        myRenderer = GetComponent<MeshRenderer>();
+        myCollider = GetComponent<BoxCollider>();
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player")) // If collided object is the player
         {
+            PlayerLabel playerStats = collision.gameObject.GetComponent<PlayerLabel>();
             Debug.Log("collide");
-            powerUpCredits++;
-            PowerUpCollector.instance.AddScore();
+            playerStats.numTeleports++;
+            //PowerUpCollector.instance.AddScore();
 
             //Vector3 teleportPosition = playerTransform.position + playerTransform.forward * teleportDistance;
             //playerTransform.position = teleportPosition;
-           
+            myRenderer.enabled = false;
+            myCollider.enabled = false;
+            //Destroy(this.gameObject);
+
         }
     }
 }
