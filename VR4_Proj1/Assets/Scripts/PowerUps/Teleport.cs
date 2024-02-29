@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class Teleport : MonoBehaviour
 {
-    public float teleportDistance = 3f; // Distance to teleport
+    public Vector3 teleportPosition;
+    public float teleportDistance = 3.0f; // Distance to teleport
     private Transform playerTransform;
     public int powerUpCredits = 0;
 
@@ -32,9 +36,10 @@ public class Teleport : MonoBehaviour
         {
             Debug.Log("collide");
             powerUpCredits++;
-           
-            Vector3 teleportPosition = playerTransform.position + playerTransform.forward * teleportDistance;
-            playerTransform.position = teleportPosition;
+            PowerUpCollector.instance.AddScore();
+
+            //Vector3 teleportPosition = playerTransform.position + playerTransform.forward * teleportDistance;
+            //playerTransform.position = teleportPosition;
            
         }
     }

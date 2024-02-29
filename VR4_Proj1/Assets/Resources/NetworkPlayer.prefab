@@ -467,6 +467,8 @@ GameObject:
   - component: {fileID: 5402413396198263198}
   - component: {fileID: 7289908068750788943}
   - component: {fileID: 8770500648146533579}
+  - component: {fileID: 8535769771224134529}
+  - component: {fileID: 8135437514179393187}
   m_Layer: 0
   m_Name: lego_w_rig
   m_TagString: Player
@@ -583,6 +585,31 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &8535769771224134529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521897457245523533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4aa918134f28c5418e15918b89eaa37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportCounter: {fileID: 0}
+--- !u!114 &8135437514179393187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521897457245523533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40407bf296ae534da0df09b571f8796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1579652690241026573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,6 +2582,10 @@ PrefabInstance:
     - target: {fileID: 8706701007296904730, guid: 45600fbe80bc9ce40b4777ecb2b70d12, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706701007296904730, guid: 45600fbe80bc9ce40b4777ecb2b70d12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9179421262148730073, guid: 45600fbe80bc9ce40b4777ecb2b70d12, type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.size
