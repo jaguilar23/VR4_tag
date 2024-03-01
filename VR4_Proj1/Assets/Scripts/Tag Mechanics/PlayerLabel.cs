@@ -7,25 +7,30 @@ using UnityEngine.UI;
 public class PlayerLabel : MonoBehaviour
 {
     public bool isSeeker;
+    public float waitTime = 15.0f;
+    public float designateSeekerTimer = 0.0f;
     float seekerStartTime = 10.0f;
     public float currentSeekerTimer;
 
     public int numTeleports = 0;
     float teleportDistance = 15.0f;
+    private MeshRenderer myRenderer;
 
     [SerializeField] TextMeshProUGUI teleportCountDisplay;
-
-
+    [SerializeField] TextMeshProUGUI seekerLabel;
 
     // Start is called before the first frame update
     void Start()
     {
+        myRenderer = GetComponent<MeshRenderer>();
         currentSeekerTimer = seekerStartTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        designateSeekerTimer += Time.deltaTime;
+
         if (isSeeker)
         {
             if (currentSeekerTimer <= 0.0f)
@@ -49,16 +54,19 @@ public class PlayerLabel : MonoBehaviour
             numTeleports--;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (designateSeekerTimer > waitTime)
         {
             // display UI to user
             if (isSeeker)
             {
                 Debug.Log("You are the SEEKER");
+                seekerLabel.text = "You are the SEEKER ";               
+                
             }
-            else
+            else 
             {
                 Debug.Log("You are a HIDER");
+                seekerLabel.text = "You are a HIDER ";                
             }
         }
     }

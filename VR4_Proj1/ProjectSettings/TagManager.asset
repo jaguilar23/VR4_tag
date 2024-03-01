@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Planet
   - Teleport
+  - seeker
+  - hider
   layers:
   - Default
   - TransparentFX

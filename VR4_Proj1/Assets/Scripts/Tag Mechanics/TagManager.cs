@@ -8,7 +8,10 @@ public class TagManager : MonoBehaviour
 
     public GameObject[] playerList;
     public GameObject playerLabel;
+    private float waitTime = 15.0f;
+    private float designateSeekerTimer = 0.0f;
     private PlayerLabel script;
+
 
     private void Start()
     {
@@ -19,12 +22,20 @@ public class TagManager : MonoBehaviour
     void Update()
     {
         playerList = GameObject.FindGameObjectsWithTag("Player");
+        designateSeekerTimer += Time.deltaTime;
 
-        
+        if (designateSeekerTimer > waitTime)
+        {
+            designateSeeker();
+            Debug.Log("seeker assigned");
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.K))
         {
             designateSeeker();
         }
+        */
     }
 
     public void designateSeeker()

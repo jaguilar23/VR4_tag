@@ -23,13 +23,13 @@ public class TurboSpeed : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        MultiplayerMovement multiplayerMovement = collision.gameObject.GetComponent<MultiplayerMovement>();
         if (collision.gameObject.CompareTag("Player")) // If collided object is the player
         {
             Debug.Log("collide");
             if (!boostActive) // Check if boost is not already active
             {              
-                StartCoroutine(BoostSpeed(playerController));
+                StartCoroutine(BoostSpeed(multiplayerMovement));
                 Debug.Log("Speed");
             }
         }
@@ -39,26 +39,26 @@ public class TurboSpeed : MonoBehaviour
         myCollider.enabled = false;
     }
 
-    IEnumerator BoostSpeed(PlayerController playerController)
+    IEnumerator BoostSpeed(MultiplayerMovement multiplayerMovement)
     {
 
         Debug.Log("Start Couroutine");
         boostActive = true;
-        ActivateTurboSpeed(playerController);
+        ActivateTurboSpeed(multiplayerMovement);
        // playerController.walkSpeed += speedMultiplier; // Double the player's walk speed
         yield return new WaitForSeconds(duration);
-        DeactivateTurboSpeed(playerController);
+        DeactivateTurboSpeed(multiplayerMovement);
         // playerController.walkSpeed = 14; // Reset the player's walk speed 
         boostActive = false;
     }
 
-    private void ActivateTurboSpeed(PlayerController playerController)
+    private void ActivateTurboSpeed(MultiplayerMovement multiplayerMovement)
     {
-        playerController.walkSpeed *= speedMultiplier;
+        multiplayerMovement.movementSpeed *= speedMultiplier;
     }
 
-    private void DeactivateTurboSpeed(PlayerController playerController)
+    private void DeactivateTurboSpeed(MultiplayerMovement multiplayerMovement)
     {
-        playerController.walkSpeed /= speedMultiplier;
+        multiplayerMovement.movementSpeed /= speedMultiplier;
     }
 }

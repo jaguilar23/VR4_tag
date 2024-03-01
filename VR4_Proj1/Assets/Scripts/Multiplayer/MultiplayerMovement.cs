@@ -10,7 +10,7 @@ public class MultiplayerMovement : MonoBehaviour
 
     private float xInput;
     private float yInput;
-    private float movementSpeed = 10.0f;
+    public float movementSpeed = 10.0f;
 
     private InputData inputData;
     //[SerializeField] private GameObject myObjectToMove;
